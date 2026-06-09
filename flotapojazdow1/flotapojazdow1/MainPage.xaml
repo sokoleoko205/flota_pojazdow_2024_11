@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="flotapojazdow1.MainPage">
+
+    <ScrollView Orientation="Both" Scrolled="OnScrollViewScrolled">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+            <Grid BackgroundColor="White" x:Name="przypiety1" ZIndex="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label VerticalOptions="CenterAndExpand" FontAttributes ="Bold"  TextColor="Black" FontSize="26" x:Name="dataigodzina" Grid.Column="0" Margin="10"/>
+                <ImageButton Source="aktualizuj.png" Grid.Column="1" Margin="10" WidthRequest="100" Command="{Binding AktualizujZaznaczoneSamochodyCommand}"/>
+                <ImageButton  Source="usun.png" Grid.Column="2" Margin="10" WidthRequest="100" Command="{Binding UsunZaznaczoneSamochodyCommand}"/>
+                <ImageButton  Source="raport.png" Grid.Column="3" Margin="10" WidthRequest="100" Command="{Binding Raport}"/>
+            
+        </Grid>
+        <!-- Nagłówki tabeli -->
+            <Grid BackgroundColor="Red" x:Name="przypiety2" ZIndex="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Lp" FontSize="16" Grid.Column="0" Margin="10"/>
+            <Label Text="Marka" FontSize="16" Grid.Column="1" Margin="10"/>
+            <Label Text="Model" FontSize="16" Grid.Column="2" Margin="10"/>
+            <Label Text="Numer Rejestracyjny" FontSize="16" Grid.Column="3" Margin="10"/>
+            <Label Text="VIN" FontSize="16" Grid.Column="4" Margin="10"/>
+            <Label Text="Data Przeglądu" FontSize="16" Grid.Column="5" Margin="10"/>
+            <Label Text="Data Następnego Przeglądu" FontSize="16" Grid.Column="6" Margin="10"/>
+            <Label Text="Rok Produkcji" FontSize="16" Grid.Column="7" Margin="10"/>
+            <Label Text="Przebieg" FontSize="16" Grid.Column="8" Margin="10"/>
+            <Label Text="Opis" FontSize="16" Grid.Column="9" Margin="10"/>
+            <Label Text="Plyny" FontSize="16" Grid.Column="10" Margin="10"/>
+
+            </Grid>
+        <!-- Tabela z danymi -->
+            <CollectionView ItemsSource="{Binding samochody}" SelectedItem="{Binding WybranySamochod}">
+
+            <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Grid x:Name="mainGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="230"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="110"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Kolumna 1 - Lp -->
+                            <Label FontAttributes="Bold" TextColor="Red" Text="{Binding id}" FontSize="16" Grid.Column="0" Margin="10"/>
+                            <CheckBox IsChecked="{Binding Zaznaczony}" x:Name="{Binding id}" Grid.Column="0" Margin="10"/>
+
+                            <!-- Kolumna 2 - Marka -->
+                            <Label Text="{Binding marka}" FontSize="16" Grid.Column="1" Margin="10"/>
+
+                            <!-- Kolumna 3 - Model -->
+                            <Label Text="{Binding model}" FontSize="16" Grid.Column="2" Margin="10"/>
+
+                            <!-- Kolumna 4 - Numer Rejestracyjny -->
+                            <Label Text="{Binding numer_rejestracyjny}" FontSize="16" Grid.Column="3" Margin="10"/>
+
+                            <!-- Kolumna 5 - VIN -->
+                            <Label Text="{Binding vin}" FontSize="16" Grid.Column="4" Margin="10"/>
+
+                            <!-- Kolumna 6 - Data Przeglądu -->
+                            <Entry Placeholder="Data przeglądu" Text="{Binding data_przegladu, StringFormat='{0:yyyy-MM-dd}'}" FontSize="16" Grid.Column="5" Margin="10"/>
+
+                            <!-- Kolumna 7 - Data Następnego Przeglądu -->
+                            <Entry Placeholder="Data następnego przeglądu"  Text="{Binding data_nastepnego_przegladu, StringFormat='{0:yyyy-MM-dd}'}" FontSize="16" Grid.Column="6" Margin="10"/>
+
+                            <!-- Kolumna 8 - Rok Produkcji -->
+                            <Label Text="{Binding rok_produkcji}" FontSize="16" Grid.Column="7" Margin="10"/>
+
+                            <!-- Kolumna 9 - Przebieg -->
+                            <Entry Placeholder="Przebieg"  Text="{Binding przebieg}" FontSize="16" Grid.Column="8" Margin="10"/>
+                            
+                            <!-- Kolumna 10 - Przejście do opisu -->
+                            <ImageButton Source="opis.png" Grid.Column="9" Margin="10" Clicked="Opis"/>
+
+                            <!-- Kolumna 10 - Przejście do płynów -->
+                            <ImageButton Source="plyny.png" Grid.Column="10" Margin="10" Clicked="Plyny"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!-- Wpisywanie do tabeli -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="+" FontSize="34" Grid.Column="0" Margin="10"/>
+            <Entry Placeholder="Marka" Text="{Binding NowySamochod.marka}" FontSize="16" Grid.Column="1" Margin="10"/>
+            <Entry Placeholder="Model" Text="{Binding NowySamochod.model}" FontSize="16" Grid.Column="2" Margin="10"/>
+            <Entry Placeholder="Numer rejestracyjny" Text="{Binding NowySamochod.numer_rejestracyjny}" FontSize="16" Grid.Column="3" Margin="10"/>
+            <Entry Placeholder="VIN" Text="{Binding NowySamochod.vin}" FontSize="16" Grid.Column="4" Margin="10"/>
+            <Entry Placeholder="Data przeglądu" Text="{Binding DzisiejszaData, StringFormat='{0:yyyy-MM-dd}'}" FontSize="16" Grid.Column="5" Margin="10"/>
+            <Entry Placeholder="Data następnego przeglądu" Text="{Binding DataZaRok, StringFormat='{0:yyyy-MM-dd}'}"  FontSize="16" Grid.Column="6" Margin="10"/>
+            <Entry Placeholder="Rok produkcji" Text="{Binding NowySamochod.rok_produkcji}" FontSize="16" Grid.Column="7" Margin="10"/>
+            <Entry Placeholder="Przebieg" Text="{Binding NowySamochod.przebieg}" FontSize="16" Grid.Column="8" Margin="10"/>
+            <ImageButton Source="dodaj.png" Grid.Column="9" Margin="9" Command="{Binding DodajNowySamochodCommand}"/>
+            <ImageButton Source="wyczysc.png" Grid.Column="10" Margin="10" Command="{Binding WyczyscCommand}"/>
+
+        </Grid>
+    </StackLayout>
+    </ScrollView>
+
+</ContentPage>

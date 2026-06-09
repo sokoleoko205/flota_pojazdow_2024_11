@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="flotapojazdow1.LoginPage">
+    <StackLayout WidthRequest="400" Margin="20">
+        <Label Margin="10" Text="Zaloguj się" HorizontalOptions="Center" FontSize="36"/>
+        <Entry Placeholder="Login" Margin="10" x:Name="UsernameEntry" />
+        <Entry Placeholder="Hasło" Margin="10" IsPassword="True" x:Name="PasswordEntry" />
+        <Button Text="Zaloguj się" Margin="10" Clicked="OnLoginButtonClicked" />
+    </StackLayout>
+</ContentPage>
